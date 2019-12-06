@@ -7,13 +7,13 @@ library(plotly)
 # - move the read_csv calls to app.R
 
 
-pollution_df <- read_csv("data/processed_data.csv",
+pollution_df <- read_csv("../data/processed_data.csv",
                col_types = cols_only(index = col_date(),
                                      STATION_NAME = col_factor(),
                                      PARAMETER = col_factor(),
                                      RAW_VALUE = col_double()))
 
-df_avg <- read_csv("data/processed_baseline_data.csv",
+df_avg <- read_csv("../data/processed_baseline_data.csv",
                   col_types = cols_only(index = col_date(),
                                      PARAMETER = col_factor(),
                                      RAW_VALUE = col_double()))
