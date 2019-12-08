@@ -7,20 +7,20 @@ library(plotly)
 # - move the read_csv calls to app.R
 
 
-pollution_df <- read_csv("../data/processed_data.csv",
-               col_types = cols_only(index = col_date(),
-                                     STATION_NAME = col_factor(),
-                                     PARAMETER = col_factor(),
-                                     RAW_VALUE = col_double()))
+# pollution_df <- read_csv("../data/processed_data.csv",
+#                col_types = cols_only(index = col_date(),
+#                                      STATION_NAME = col_factor(),
+#                                      PARAMETER = col_factor(),
+#                                      RAW_VALUE = col_double()))
 
-df_avg <- read_csv("../data/processed_baseline_data.csv",
-                  col_types = cols_only(index = col_date(),
-                                     PARAMETER = col_factor(),
-                                     RAW_VALUE = col_double()))
+# df_avg <- read_csv("../data/processed_baseline_data.csv",
+#                   col_types = cols_only(index = col_date(),
+#                                      PARAMETER = col_factor(),
+#                                      RAW_VALUE = col_double()))
 
 ###### Plot 1: Location Linechart
 
-location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list(), width = NULL, height = NULL, daterange=[2000,2017]){
+location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list(), width = NULL, height = NULL, daterange=list(2000,2017)){
   
   temp_data <- data %>% filter(PARAMETER == pm, STATION_NAME %in% init_locations)
   temp_avg <- avg_data %>% filter(PARAMETER == pm)
@@ -39,7 +39,7 @@ location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list
 
 ###### Plot 2: One Location Linechart
 
-linechart <- function(data, avg_data, init_locations= list(), width = NULL, height = NULL, daterange=[2000,2017]){
+linechart <- function(data, avg_data, init_locations= list(), width = NULL, height = NULL, daterange= list(2000,2017)){
   
   temp_data <- data %>% filter(STATION_NAME %in% init_locations)
   temp_PM10 <- temp_data %>% filter(PARAMETER == "PM10")
@@ -56,7 +56,7 @@ linechart <- function(data, avg_data, init_locations= list(), width = NULL, heig
 
 
 ###### Plot 3: Distribution Histogram
-barplot <- function(data, pm = "PM25", init_locations = list(), width = NULL, height = NULL, daterange=[2000,2017]){
+barplot <- function(data, pm = "PM25", init_locations = list(), width = NULL, height = NULL, daterange= list(2000,2017)){
     
     temp_data <- data %>% filter(PARAMETER == pm, STATION_NAME %in% init_locations)
     
@@ -70,7 +70,7 @@ barplot <- function(data, pm = "PM25", init_locations = list(), width = NULL, he
 
 ###### Plot 4: Heatmap
 
-heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, daterange=[2000,2017]){
+heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, daterange= list(2000,2017)){
     
     temp_data <- data %>% filter(PARAMETER == pm)
     
