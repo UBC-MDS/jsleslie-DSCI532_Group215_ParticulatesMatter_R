@@ -34,21 +34,21 @@ chart_2 <- dccGraph(
 
 chart_3 <- dccGraph(
   id = "chart-3",
-  figure = ggplotly(barplot(pm_df, avg_df, init_locations = list("Vancouver", "Kelowna")))
+  figure = ggplotly(barplot(pm_df, init_locations = list("Vancouver", "Kelowna")))
 )
 
-# chart_4 <- dccGraph(
-#   id = "chart-4",
-#   figure = ggplotly(heatmap(pm_df, avg_df)))
+chart_4 <- dccGraph(
+  id = "chart-4",
+  figure = ggplotly(heatmap(pm_df)))
 
 app$layout(
   htmlDiv(
     list(
       htmlH1("Test"),
       chart_1,
-      chart_2
-
-
+      chart_2,
+      chart_3,
+      chart_4
     )
   )
 )
