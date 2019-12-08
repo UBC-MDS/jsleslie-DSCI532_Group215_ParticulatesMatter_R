@@ -44,12 +44,25 @@ chart_4 <- dccGraph(
 app$layout(
   htmlDiv(
     list(
+      htmlDiv(className="row", style=list(backgroundColor="#000000", border='1px solid', padding_left="5"), children= list(
+        htmlH3('Pollutants Matter BC – Visualization of Particulate Matter Concentrations',
+                style= list(color = "#ffffff", margin_top = 2, margin_bottom = 2)),
+        htmlP('This application tracks weighted monthly averages for pollution data collected from different stations across British Columbia. The measured pollutants, PM2.5 and PM10, refer to atmospheric particulate matter (PM) that have a diameter of less than 2.5 and 10 micrometers, respectively.',
+                style= list(color = "#ffffff", margin_top = 2, margin_bottom = 2))
+      )),
+      htmlDiv(
+        list(
+          htmlH1("test-2")
+        ),
+        className = "four columns"
+      ),
       htmlH1("Test"),
       chart_1,
       chart_2,
       chart_3,
       chart_4
-    )
+    ),
+    className = "row"
   )
 )
 
