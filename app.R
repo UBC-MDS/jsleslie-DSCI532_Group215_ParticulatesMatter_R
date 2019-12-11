@@ -50,21 +50,111 @@ app$layout(
         htmlP('This application tracks weighted monthly averages for pollution data collected from different stations across British Columbia. The measured pollutants, PM2.5 and PM10, refer to atmospheric particulate matter (PM) that have a diameter of less than 2.5 and 10 micrometers, respectively.',
                 style= list(color = "#ffffff", margin_top = 2, margin_bottom = 2))
       )),
-      htmlDiv(
-        list(
-          htmlH1("test-2")
-        ),
-        className = "four columns"
+
+      htmlDiv(className="row", children = list(
+
+        ## SIDE BAR - COLUMN 1
+        htmlDiv(className = "two columns", children =list(
+
+          htmlDiv(className = "row", 
+            style=list(backgroundColor ="#8BBEE8FF",padding_left="10", padding_right="10", padding_top="2", padding_bottom="195",border= '1px solid'), 
+            children = list(
+                      htmlP("Chart 1 & 2 controls:\n\n\n"),
+                      htmlP("Pollutant:"),
+
+                      ### INSERT RADIO BUTTONS HERE
+
+                      htmlP("Location:")
+
+                      ### INSERT DROPDOWN LIST HERE
+                    ))      
+        )
       ),
-      htmlH1("Test"),
-      chart_1,
-      chart_2,
-      chart_3,
-      chart_4
+        ## CHART 1 
+        htmlDiv(className = "five columns", style=list(backgroundColor= "#ffffff", margin_left='10', margin_right= '10', padding= "0"), children =list(
+          htmlDiv(className = "row", children=list(
+            htmlH6("Chart 1: <Polutant> Concentration for given locations", 
+              style=list(backgroundColor ="#8BBEE8FF", border='1px solid', text_align='center', padding_left= "5")),
+            chart_1))
+        )
+      ),
+
+        ## CHART 2
+        htmlDiv(className = "five columns", style=list(backgroundColor= "#ffffff", margin_left='10', margin_right= '10', padding= "0"), children =list(
+            htmlDiv(className = "row", children=list(
+              htmlH6("Chart 2: Distribution of <Pollutant> Concentrations for BC cities",
+                style=list(backgroundColor ="#8BBEE8FF", border='1px solid', text_align='center', padding_left= "5")),
+              chart_2))
+          )
+      ))
+      ),
+
+      htmlDiv(className="row", children = list(
+
+        ## SIDE BAR - COLUMN 1
+        htmlDiv(className = "two columns", children =list(
+          
+          ### BOX 2
+          htmlDiv(className = "row", 
+            style=list(backgroundColor ="#A8D5BAFF",padding_left="10", padding_right="10", padding_top="2", padding_bottom="195",border= '1px solid'), 
+            children = list(
+                      htmlP("Chart 3 controls:\n\n\n"),
+                      htmlP("Location:")
+
+                      ### INSERT DROPDOWN LIST HERE
+                    )),
+
+          ### BOX 3
+          htmlDiv(className = "row", 
+          style=list(backgroundColor ="#E3D1FB",padding_left="10", padding_right="10", padding_top="2", padding_bottom="195",border= '1px solid'), 
+          children = list(
+                    htmlP("Chart 4 controls:\n\n\n"),
+                    htmlP("Pollutant:")
+
+                    ### INSERT RADIO BUTTONS LIST HERE
+                  ))      
+        )
+      ),
+      ## CHART 3 
+      htmlDiv(className = "five columns", children =list(
+        htmlDiv(className = "row", children=list(
+          htmlH6("Chart 3: Pollutant Concentration in <Location>",
+            style=list(backgroundColor ="#A8D5BAFF", border='1px solid', text_align='center', padding_left= "5")),
+          chart_3))
+      )
     ),
-    className = "row"
-  )
-)
+
+      ## CHART 4
+      htmlDiv(className = "five columns", children =list(
+          htmlDiv(className = "row", children=list(
+            htmlH6("Chart 4: <Pollutant> Concentration Heatmap",
+              style=list(backgroundColor ="#E3D1FB", border='1px solid', text_align='center', padding_left= "5")),
+            chart_4))
+        )
+    ))
+    ),
+
+
+
+      htmlDiv(className = "row", children = list(
+          #htmlP("Date control slider"),
+           #BOX5 DATE CONTROLLER
+          htmlDiv(className="row",  style=list(backgroundColor="#d2d7df", padding_bottom ="30", padding_left="10",  border ='1px solid'), children=list(
+              htmlP("Date control slider", style=list(padding_top="0"))
+              
+              ### DATE SLIDER COMPONENT GOES HERE
+
+
+              ),
+          htmlA("BC Ministry of Environment and Climate Change Strategy", href = "https://catalogue.data.gov.bc.ca/dataset/77eeadf4-0c19-48bf-a47a-fa9eef01f409", target = "_blank"),
+          htmlP("Data is limited to the stations where measurements were taken and therefore does not account for the entirety of BC")
+      ))
+      )
+  
+    )
+    
+  ))
+
 
 # #### End of Component Making
 # app$layout(
