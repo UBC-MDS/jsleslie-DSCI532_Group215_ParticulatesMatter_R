@@ -60,7 +60,7 @@ linechart <- function(data, avg_data, init_locations= list(), width = NULL, heig
   temp_data <- temp_data %>% filter(index > as.Date(as.character(daterange[[1]]), format='%Y') & index <= as.Date(as.character(daterange[[2]]), format = '%Y')) 
   #temp_PM10 <- temp_data %>% filter(PARAMETER == "PM10")
   #temp_PM25 <- temp_data %>% filter(PARAMETER == "PM25")
-  
+  levels(temp_data$PARAMETER) <- c("PM10", "PM2.5")
   
   ggplot(temp_data, aes(x = index, y = RAW_VALUE, color = PARAMETER)) +
   geom_line(data = avg_data, aes(x = index, y = RAW_VALUE, group = PARAMETER), color = "grey") +
