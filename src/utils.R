@@ -103,7 +103,7 @@ heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, da
     ggplot(temp_data, aes(x = factor(index), y = STATION_NAME, fill = RAW_VALUE)) +
           geom_tile() +
           scale_x_discrete(breaks = c(x_axis_vals), labels = c(new_x_vals)) +
-          scale_fill_viridis(option = "magma") +
+          scale_fill_viridis(option = "magma", direction = -1) +
           labs( x = "Date",y = "Location", fill = "Pollution\nConcentration\n(µg/m3)") +
           theme(legend.title = element_text( size = 7), legend.position = "top") 
       
