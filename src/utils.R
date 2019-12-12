@@ -23,6 +23,7 @@ library(plotly)
 location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list(), width = NULL, height = NULL, daterange=list(2000,2017)){
   
   temp_data <- data %>% filter(PARAMETER == pm, STATION_NAME %in% init_locations)
+  temp_data <- temp_data %>% filter(index > as.Date(as.character(daterange[[1]]), format='%Y') & index <= as.Date(as.character(daterange[[2]]), format = '%Y')) 
   temp_avg <- avg_data %>% filter(PARAMETER == pm)
   
   ggplot(temp_data, aes(x = index, y = RAW_VALUE, color = STATION_NAME)) + 
@@ -42,6 +43,7 @@ location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list
 linechart <- function(data, avg_data, init_locations= list(), width = NULL, height = NULL, daterange= list(2000,2017)){
   
   temp_data <- data %>% filter(STATION_NAME %in% init_locations)
+  temp_data <- temp_data %>% filter(index > as.Date(as.character(daterange[[1]]), format='%Y') & index <= as.Date(as.character(daterange[[2]]), format = '%Y')) 
   temp_PM10 <- temp_data %>% filter(PARAMETER == "PM10")
   temp_PM25 <- temp_data %>% filter(PARAMETER == "PM25")
   
@@ -59,6 +61,7 @@ linechart <- function(data, avg_data, init_locations= list(), width = NULL, heig
 barplot <- function(data, pm = "PM25", init_locations = list(), width = NULL, height = NULL, daterange= list(2000,2017)){
     
     temp_data <- data %>% filter(PARAMETER == pm, STATION_NAME %in% init_locations)
+  temp_data <- temp_data %>% filter(index > as.Date(as.character(daterange[[1]]), format='%Y') & index <= as.Date(as.character(daterange[[2]]), format = '%Y')) 
     
     ggplot(temp_data, aes(x = RAW_VALUE, fill = STATION_NAME, color = STATION_NAME)) + 
     geom_histogram(position = "identity", alpha = 0.3, binwidth = 0.5)  +
