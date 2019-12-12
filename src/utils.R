@@ -42,7 +42,6 @@ location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list
   geom_point() +
   labs(x = "Year",
        y = "Pollutant Concentration (µg/m3)", 
-       title = "Abbotsford PM10 values VS Provincial Average",
        color = "Locations")
   
 }
@@ -68,7 +67,7 @@ linechart <- function(data, avg_data, init_locations= list(), width = NULL, heig
   geom_point(data = avg_data, aes(x = index, y = RAW_VALUE, group = PARAMETER), color = "grey") +
   geom_line() +
   geom_point() +
-  labs(x = "Year", y = "Pollutant Concentration (µg/m3)", title = "Abbotsford PM10 values VS Provincial Average")
+  labs(x = "Year", y = "Pollutant Concentration (µg/m3)")
   
 }
 
@@ -98,7 +97,9 @@ heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, da
     new_x_vals <- lapply(x_axis_vals, function(x) paste("Jan\n ", str_replace(x, "(-01-01)", "")))
     
     ggplot(temp_data, aes(x = factor(index), y = STATION_NAME, fill = RAW_VALUE)) +
-           geom_tile() +
-             scale_x_discrete(breaks = c(x_axis_vals), labels = c(new_x_vals)) +
-            labs( x = "Date",y = "Location", fill = "Pollution Concentration (µg/m3)")
+          geom_tile() +
+          scale_x_discrete(breaks = c(x_axis_vals), labels = c(new_x_vals)) +
+          labs( x = "Date",y = "Location", fill = "Pollution\nConcentration\n(µg/m3)") +
+          theme(legend.title = element_text( size = 7), legend.position = "top") 
+      
 }
