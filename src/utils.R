@@ -40,6 +40,7 @@ location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list
   geom_point(data = temp_avg, aes(x = index, y = RAW_VALUE), color = "grey") +
   geom_line() +
   geom_point() +
+  scale_color_brewer(palette = "Dark2") +
   labs(x = "Year",
        y = "Pollutant Concentration (µg/m3)", 
        color = "Locations")
@@ -67,6 +68,7 @@ linechart <- function(data, avg_data, init_locations= list(), width = NULL, heig
   geom_point(data = avg_data, aes(x = index, y = RAW_VALUE, group = PARAMETER), color = "grey") +
   geom_line() +
   geom_point() +
+  scale_color_brewer(palette = "Dark2") +
   labs(x = "Year", y = "Pollutant Concentration (µg/m3)")
   
 }
@@ -80,6 +82,8 @@ barplot <- function(data, pm = "PM25", init_locations = list(), width = NULL, he
     
     ggplot(temp_data, aes(x = RAW_VALUE, fill = STATION_NAME, color = STATION_NAME)) + 
     geom_histogram(position = "identity", alpha = 0.3, binwidth = 0.5)  +
+    scale_color_brewer(palette = "Dark2") +
+    scale_fill_brewer(palette = "Dark2") +
     labs(x = "Pollutant Concentration (µg/m3)", y = "Frequency", fill = "Locations") +
     guides(color=FALSE)
     
@@ -99,6 +103,7 @@ heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, da
     ggplot(temp_data, aes(x = factor(index), y = STATION_NAME, fill = RAW_VALUE)) +
           geom_tile() +
           scale_x_discrete(breaks = c(x_axis_vals), labels = c(new_x_vals)) +
+          scale_fill_viridis(option = "magma") +
           labs( x = "Date",y = "Location", fill = "Pollution\nConcentration\n(µg/m3)") +
           theme(legend.title = element_text( size = 7), legend.position = "top") 
       
