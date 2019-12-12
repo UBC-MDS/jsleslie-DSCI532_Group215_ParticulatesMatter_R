@@ -155,7 +155,7 @@ combined_data['index'] = pd.to_datetime(combined_data['index']).astype('str')
 combined_baseline_data['index'] = pd.to_datetime(combined_baseline_data['index']).astype('str')
 
 # Export the processed files
-combined_data.to_csv("/data/processed_data.csv")
-combined_baseline_data.to_csv("/data/processed_baseline_data.csv")
-get_summary(combined_data).to_csv("/data/location_summary.csv")
+combined_data.to_csv("data/processed_data.csv")
+combined_baseline_data.to_csv("data/processed_baseline_data.csv")
+get_summary(combined_data).to_csv("data/location_summary.csv")
 
