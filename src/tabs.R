@@ -15,7 +15,7 @@ get_first_tab <- function(pm_df, avg_df) {
 
 	chart_2 <- dccGraph(
 	  id = "chart-2",
-	  figure = ggplotly(location_linechart(pm_df, avg_df, init_locations = list("Vancouver", "Kelowna")))
+	  figure = ggplotly(location_linechart(pm_df, avg_df, init_locations = list("Vancouver", "Kelowna"))) 
 	)
 
 	chart_3 <- dccGraph(
