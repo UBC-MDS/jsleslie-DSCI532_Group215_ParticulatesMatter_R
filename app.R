@@ -3,7 +3,6 @@ library(dash)
 library(dashCoreComponents)
 library(dashHtmlComponents)
 library(dashTable)
-#library(tidyverse)
 library(readr)
 library(plotly)
 library(zoo)
@@ -123,4 +122,4 @@ app$callback(
 	ggplotly(heatmap(pm_df, pm=pm_s))
   }
 )
-app$run_server()
+app$run_server(host = "0.0.0.0", port = Sys.getenv('PORT', 8050))
