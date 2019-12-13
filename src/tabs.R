@@ -4,7 +4,7 @@ library(dashHtmlComponents)
 library(dashTable)
 #library(tidyverse)
 library(plotly)
-source("src/utils.R")
+source("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/src/utils.R")
 
 get_first_tab <- function(pm_df, avg_df) {
 

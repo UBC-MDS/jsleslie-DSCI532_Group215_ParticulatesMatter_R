@@ -1,6 +1,9 @@
 library(dplyr)
 library(ggplot2)
 library(plotly)
+library(tidyr)
+library(stringr)
+library(purrr)
 
 
 ## TO DO:
