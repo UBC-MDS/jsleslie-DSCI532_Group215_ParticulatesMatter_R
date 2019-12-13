@@ -2,7 +2,7 @@ library(dash)
 library(dashCoreComponents)
 library(dashHtmlComponents)
 library(dashTable)
-library(tidyverse)
+#library(tidyverse)
 library(plotly)
 source("src/utils.R")
 
