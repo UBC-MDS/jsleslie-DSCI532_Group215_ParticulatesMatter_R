@@ -48,6 +48,10 @@ install.packages("https://cloud.r-project.org/src/contrib/Archive/future/future_
 install.packages("https://cloud.r-project.org/src/contrib/routr_0.4.0.tar.gz", type="source", repos=NULL)
 install.packages("https://cloud.r-project.org/src/contrib/fiery_1.1.2.tar.gz", type="source", repos=NULL)
 
+# zoo and viridis
+install.packages("https://cloud.r-project.org/src/contrib/zoo_1.8-6.tar.gz", type="source", repos=NULL)
+install.packages("https://cloud.r-project.org/src/contrib/viridis_0.5.1.tar.gz", type="source", repos=NULL)
+
 # dash components
 remotes::install_github("plotly/dash-table", ref="042ad65")
 remotes::install_github("plotly/dash-html-components", ref="17da1f4")
