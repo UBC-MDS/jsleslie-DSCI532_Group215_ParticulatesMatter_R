@@ -8,8 +8,8 @@ library(plotly)
 library(zoo)
 library(ggplot2)
 library(viridis)
-source("https://github.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/blob/master/src/utils.R")
-source("https://github.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/blob/master/src/tabs.R")
+source("src/utils.R")
+source("src/tabs.R")
 
 app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.css")
 
