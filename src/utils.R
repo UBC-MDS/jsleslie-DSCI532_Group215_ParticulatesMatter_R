@@ -27,11 +27,10 @@ library(purrr)
 ###### Plot 1: Location Linechart
 
 location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list(), width = NULL, height = NULL, daterange=list(2000,2017)){
-  
   temp_data <- data %>% filter(PARAMETER == pm, STATION_NAME %in% init_locations)
   
   #Preserve location and conduct rolling avg operation on the nested data frame (updates RAW_VALUE column)
-  nested_df <- nest(temp_data,data = c(index, PARAMETER, RAW_VALUE))
+  nested_df <- nest(temp_data,c(index, PARAMETER, RAW_VALUE))
   nested_df$data <- lapply(nested_df$data, function(df) df %>% mutate(RAW_VALUE = rollmean(RAW_VALUE, 5, na.pad = TRUE)))
   temp_data <- unnest(nested_df, cols = data)
   
@@ -58,7 +57,7 @@ linechart <- function(data, avg_data, init_locations= list(), width = NULL, heig
   temp_data <- data %>% filter(STATION_NAME %in% init_locations)
   
   #Preserve location and conduct rolling avg operation on the nested data frame (updates RAW_VALUE column)
-  nested_df <- nest(temp_data,data = c(index, STATION_NAME, RAW_VALUE))
+  nested_df <- nest(temp_data, c(index, STATION_NAME, RAW_VALUE))
   nested_df$data <- lapply(nested_df$data, function(df) df %>% mutate(RAW_VALUE = rollmean(RAW_VALUE, 5, na.pad = TRUE)))
   temp_data <- unnest(nested_df, cols = data)
   
