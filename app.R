@@ -8,19 +8,21 @@ library(plotly)
 library(zoo)
 library(ggplot2)
 library(viridis)
+
+
 source("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/src/utils.R")
 source("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/src/tabs.R")
 
 app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.css")
 
 
-pm_df = read_csv("./data/processed_data.csv",
+pm_df = read_csv("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/data/processed_data.csv",
                col_types = cols_only(index = col_date(),
                                      STATION_NAME = col_factor(),
                                      PARAMETER = col_factor(),
                                      RAW_VALUE = col_double()))
 
-avg_df = read_csv("./data/processed_baseline_data.csv",
+avg_df = read_csv("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/data/processed_baseline_data.csv",
                   col_types = cols_only(index = col_date(),
                                      PARAMETER = col_factor(),
                                      RAW_VALUE = col_double()))
