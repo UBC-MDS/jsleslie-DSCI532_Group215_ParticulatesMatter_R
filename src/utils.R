@@ -2,11 +2,6 @@ library(tidyverse)
 library(plotly)
 
 
-## TO DO:
-# - add comments/docstrings
-# - use better color scheme
-# - move the read_csv calls to app.R
-
 # Read in files for testing phase (remove from final product)
 # pollution_df <- read_csv("data/processed_data.csv",
 #                col_types = cols_only(index = col_date(),
