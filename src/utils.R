@@ -1,5 +1,9 @@
-library(tidyverse)
+library(dplyr)
+library(ggplot2)
 library(plotly)
+library(tidyr)
+library(stringr)
+library(purrr)
 
 
 # Read in files for testing phase (remove from final product)

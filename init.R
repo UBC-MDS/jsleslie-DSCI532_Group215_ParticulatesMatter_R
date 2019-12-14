@@ -20,6 +20,9 @@ install.packages("listenv")
 install.packages("anytime")
 install.packages("readr")
 install.packages("heatmaply")
+install.packages("stringr")
+install.packages("purrr")
+install.packages("tidyr")
 
 # installs magrittr, promises, R6
 remotes::install_version("httpuv", version = "1.4.5.1", repos = "http://cloud.r-project.org", upgrade="never")
@@ -47,6 +50,10 @@ install.packages("https://cloud.r-project.org/src/contrib/Archive/future/future_
 # fiery and friends
 install.packages("https://cloud.r-project.org/src/contrib/routr_0.4.0.tar.gz", type="source", repos=NULL)
 install.packages("https://cloud.r-project.org/src/contrib/fiery_1.1.2.tar.gz", type="source", repos=NULL)
+
+# zoo and viridis
+install.packages("https://cloud.r-project.org/src/contrib/zoo_1.8-6.tar.gz", type="source", repos=NULL)
+install.packages("https://cloud.r-project.org/src/contrib/viridis_0.5.1.tar.gz", type="source", repos=NULL)
 
 # dash components
 remotes::install_github("plotly/dash-table", ref="042ad65")
