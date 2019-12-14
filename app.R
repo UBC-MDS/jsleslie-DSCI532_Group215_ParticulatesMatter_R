@@ -171,7 +171,7 @@ app$callback(
 
   # this translates your list of params into function arguments
   function(pm_s) {
-	ggplotly(heatmap(pm_df, pm=pm_s))
+	ggplotly(heatmap(pm_df, pm=pm_s, include_years=TRUE))
   }
 )
 app$run_server(host = "0.0.0.0", port = Sys.getenv('PORT', 8050))

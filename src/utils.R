@@ -95,19 +95,32 @@ barplot <- function(data, pm = "PM25", init_locations = list(), width = NULL, he
 
 ###### Plot 4: Heatmap
 
-heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, daterange= list(2000,2017)){
+heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, daterange= list(2000,2017), include_years=FALSE){
     
     temp_data <- data %>% filter(PARAMETER == pm)
     
     x_axis_vals <- str_extract(temp_data$index, ".*-01-01")
     x_axis_vals <- unique(x_axis_vals[!is.na(x_axis_vals)])
     new_x_vals <- lapply(x_axis_vals, function(x) paste("Jan\n ", str_replace(x, "(-01-01)", "")))
-    
-    ggplot(temp_data, aes(x = factor(index), y = STATION_NAME, fill = RAW_VALUE)) +
+
+    if(include_years){
+	print('here')
+    	ggplot(temp_data, aes(x = factor(index), y = STATION_NAME, fill = RAW_VALUE)) +
           geom_tile() +
           scale_x_discrete(breaks = c(x_axis_vals), labels = c(new_x_vals)) +
           scale_fill_viridis(option = "magma", direction = -1) +
           labs( x = "Date",y = "Location", fill = "Pollution\nConcentration\n(µg/m3)") +
-          theme(legend.title = element_text( size = 7), legend.position = "top") 
-      
+          theme(legend.title = element_text( size = 7), 
+		legend.position = "top")
+    } else {
+    	ggplot(temp_data, aes(x = factor(index), y = STATION_NAME, fill = RAW_VALUE)) +
+          geom_tile() +
+          scale_x_discrete(breaks = c(x_axis_vals), labels = c(new_x_vals)) +
+          scale_fill_viridis(option = "magma", direction = -1) +
+          labs( x = "Date",y = "Location", fill = "Pollution\nConcentration\n(µg/m3)") +
+          theme(legend.title = element_text( size = 7), 
+		legend.position = "top",
+		axis.text.x=element_blank(),
+        	axis.ticks.x=element_blank()) 
+    }
 }

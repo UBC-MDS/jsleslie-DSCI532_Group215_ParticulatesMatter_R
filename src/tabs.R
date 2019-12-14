@@ -254,5 +254,5 @@ get_second_tab <- function(pm_df){
       ),
 	dccGraph(
 	  id = "chart-heatmap",
-	  figure = ggplotly(heatmap(pm_df))))
+	  figure = ggplotly(heatmap(pm_df, include_years=TRUE))))
 }
