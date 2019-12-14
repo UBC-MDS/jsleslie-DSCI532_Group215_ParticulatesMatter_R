@@ -68,7 +68,7 @@ app$callback(
 
 app$callback(
   # update figure of gap-graph
-  output=list(id = 'chart-1-title', property='children'),
+  output=list(id = 'chart-3-title', property='children'),
   
   # based on values of year, continent, y-axis components
   params=list(input(id = 'dropdown1', property='value')),
@@ -125,7 +125,7 @@ app$callback(
 
 
 app$callback(
-  output=list(id = 'chart-3-title', property='children'),
+  output=list(id = 'chart-1-title', property='children'),
   
   params=list(input(id = 'radio1', property='value')),
 

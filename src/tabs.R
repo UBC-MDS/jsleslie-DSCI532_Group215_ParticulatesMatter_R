@@ -74,8 +74,8 @@ get_first_tab <- function(pm_df, avg_df) {
       ## CHART 3 
         htmlDiv(className = "five columns", style=list(backgroundColor= "#ffffff", margin_left='10', margin_right= '10', padding= "0"), children =list(
           htmlDiv(className = "row", children=list(
-            htmlH6("Chart 3: <Polutant> Concentration for given locations", 
-	      id = 'chart-3-title',
+            htmlH6("Chart 1: <Polutant> Concentration for given locations", 
+	      id = 'chart-1-title',
               style=list(backgroundColor ="#8BBEE8FF", border='1px solid', text_align='center', padding_left= "5")),
             chart_3))
         )
