@@ -43,6 +43,7 @@ app$layout(htmlDiv(list(
   htmlDiv(id='tabs-content')
   )))
 
+# Callback to change the content of the selected tab
 app$callback(output('tabs-content', 'children'),
     params = list(input('tabs', 'value')),
 function(tab){
@@ -54,78 +55,19 @@ function(tab){
 }
 )
 
+# Callback to change the first plot
 app$callback(
-  # update figure of gap-graph
   output=list(id = 'chart-1', property='figure'),
   
-  # based on values of year, continent, y-axis components
   params=list(input(id = 'datarange', property='value'),
 	      input(id = 'dropdown1', property='value')),
 
-  # this translates your list of params into function arguments
   function(year_value, location) {
     ggplotly(linechart(pm_df, avg_df, init_locations = location, daterange = year_value)) 
   }
 )
 
-app$callback(
-  # update figure of gap-graph
-  output=list(id = 'chart-3-title', property='children'),
-  
-  # based on values of year, continent, y-axis components
-  params=list(input(id = 'dropdown1', property='value')),
-
-  # this translates your list of params into function arguments
-  function(location) {
-    paste("Chart 3: Pollutant Concentration in ",  location)
-  }
-)
-
-app$callback(
-  # update figure of gap-graph
-  output=list(id = 'chart-2', property='figure'),
-  
-  # based on values of year, continent, y-axis components
-  params=list(input(id = 'datarange', property='value'),
-	      input(id = 'dropdown2', property='value'),
-	      input(id = 'radio1', property='value')),
-
-  # this translates your list of params into function arguments
-  function(year_value, locations, pm_s) {
-    g <- ggplotly( barplot(pm_df, pm = pm_s, init_locations = locations, daterange = year_value)) %>%
-    layout(dragmode = FALSE) 
-  }
-)
-
-app$callback(
-  output=list(id = 'chart-2-title', property='children'),
-  
-  params=list(input(id = 'radio1', property='value')),
-
-  function(pm_s) {
-	if (pm_s == 'PM25') {
-  		pm_s = 'PM2.5'
-	}
-	paste("Chart 2: Distribution of ", pm_s, " Concentrations for BC cities")
-  }
-)
-
-app$callback(
-  # update figure of gap-graph
-  output=list(id = 'chart-3', property='figure'),
-  
-  # based on values of year, continent, y-axis components
-  params=list(input(id = 'datarange', property='value'),
-	      input(id = 'dropdown2', property='value'),
-	      input(id = 'radio1', property='value')),
-
-  # this translates your list of params into function arguments
-  function(year_value, locations, pm_s) {
-    ggplotly(location_linechart(pm_df, avg_df, pm=pm_s, init_locations = locations, daterange = year_value))
-  }
-)
-
-
+# Callback to change the title of the first plot
 app$callback(
   output=list(id = 'chart-1-title', property='children'),
   
@@ -139,22 +81,83 @@ app$callback(
   }
 )
 
+# Callback to change barplot
 app$callback(
-  # update figure of gap-graph
+  output=list(id = 'chart-2', property='figure'),
+  
+  params=list(input(id = 'datarange', property='value'),
+	      input(id = 'dropdown2', property='value'),
+	      input(id = 'radio1', property='value')),
+
+  function(year_value, locations, pm_s) {
+    g <- ggplotly( barplot(pm_df, pm = pm_s, init_locations = locations, daterange = year_value)) %>%
+    layout(dragmode = FALSE) 
+  }
+)
+
+# Callback to change the barplot's title
+app$callback(
+  # update title
+  output=list(id = 'chart-2-title', property='children'),
+  
+  # based on radio button
+  params=list(input(id = 'radio1', property='value')),
+
+  function(pm_s) {
+	if (pm_s == 'PM25') {
+  		pm_s = 'PM2.5'
+	}
+	paste("Chart 2: Distribution of ", pm_s, " Concentrations for BC cities")
+  }
+)
+
+# Callback to change the third chart
+app$callback(
+  # update figure
+  output=list(id = 'chart-3', property='figure'),
+  
+  # based on values of different components
+  params=list(input(id = 'datarange', property='value'),
+	      input(id = 'dropdown2', property='value'),
+	      input(id = 'radio1', property='value')),
+
+  function(year_value, locations, pm_s) {
+    ggplotly(location_linechart(pm_df, avg_df, pm=pm_s, init_locations = locations, daterange = year_value))
+  }
+)
+
+# Callback to change the title of the third chart
+app$callback(
+  # update figure title
+  output=list(id = 'chart-3-title', property='children'),
+  
+  # based on dropdown menu value
+  params=list(input(id = 'dropdown1', property='value')),
+
+  function(location) {
+    paste("Chart 3: Pollutant Concentration in ",  location)
+  }
+)
+
+# Callback to change the first tab's heatmap
+app$callback(
+  # update figure
   output=list(id = 'chart-4', property='figure'),
   
-  # based on values of year, continent, y-axis components
+  # based on value of pm component
   params=list(input(id = 'radio2', property='value')),
 
-  # this translates your list of params into function arguments
   function(pm_s) {
 	ggplotly(heatmap(pm_df, pm=pm_s))
   }
 )
 
+# Callback to change the first tab's heatmap's title
 app$callback(
+  # update title
   output=list(id = 'chart-4-title', property='children'),
   
+  # based on value of pm component
   params=list(input(id = 'radio2', property='value')),
 
   function(pm_s) {
@@ -165,14 +168,14 @@ app$callback(
   }
 )
 
+# Callback for second tab heatmap
 app$callback(
-  # update figure of gap-graph
+  # update figure
   output=list(id = 'chart-heatmap', property='figure'),
   
-  # based on values of year, continent, y-axis components
+  # based on value of pm component
   params=list(input(id = 'heatmap_pm', property='value')),
 
-  # this translates your list of params into function arguments
   function(pm_s) {
 	ggplotly(heatmap(pm_df, pm=pm_s, include_years=TRUE))
   }
