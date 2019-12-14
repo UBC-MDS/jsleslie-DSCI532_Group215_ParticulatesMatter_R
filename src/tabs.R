@@ -71,15 +71,15 @@ get_first_tab <- function(pm_df, avg_df) {
                     ))      
         )
       ),
-        ## CHART 1 
-      htmlDiv(className = "five columns", children =list(
-        htmlDiv(className = "row", children=list(
-          htmlH6("Chart 1: Pollutant Concentration in <Location>",
-	    id = 'chart-1-title',
-            style=list(backgroundColor ="#A8D5BAFF", border='1px solid', text_align='center', padding_left= "5")),
-          chart_3))
-      )
-    ),
+      ## CHART 3 
+        htmlDiv(className = "five columns", style=list(backgroundColor= "#ffffff", margin_left='10', margin_right= '10', padding= "0"), children =list(
+          htmlDiv(className = "row", children=list(
+            htmlH6("Chart 3: <Polutant> Concentration for given locations", 
+	      id = 'chart-3-title',
+              style=list(backgroundColor ="#8BBEE8FF", border='1px solid', text_align='center', padding_left= "5")),
+            chart_3))
+        )
+      ),
 
         ## CHART 2
         htmlDiv(className = "five columns", style=list(backgroundColor= "#ffffff", margin_left='10', margin_right= '10', padding= "0"), children =list(
@@ -136,15 +136,15 @@ get_first_tab <- function(pm_df, avg_df) {
                   ))      
         )
       ),
-      ## CHART 3 
-        htmlDiv(className = "five columns", style=list(backgroundColor= "#ffffff", margin_left='10', margin_right= '10', padding= "0"), children =list(
-          htmlDiv(className = "row", children=list(
-            htmlH6("Chart 3: <Polutant> Concentration for given locations", 
-	      id = 'chart-3-title',
-              style=list(backgroundColor ="#8BBEE8FF", border='1px solid', text_align='center', padding_left= "5")),
-            chart_1))
-        )
-      ),
+        ## CHART 3 
+      htmlDiv(className = "five columns", children =list(
+        htmlDiv(className = "row", children=list(
+          htmlH6("Chart 3: Pollutant Concentration in <Location>",
+	    id = 'chart-3-title',
+            style=list(backgroundColor ="#A8D5BAFF", border='1px solid', text_align='center', padding_left= "5")),
+          chart_1))
+      )
+    ),
 
       ## CHART 4
       htmlDiv(className = "five columns", children =list(

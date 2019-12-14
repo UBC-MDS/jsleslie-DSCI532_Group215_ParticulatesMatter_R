@@ -66,6 +66,18 @@ app$callback(
   }
 )
 
+app$callback(
+  # update figure of gap-graph
+  output=list(id = 'chart-1-title', property='children'),
+  
+  # based on values of year, continent, y-axis components
+  params=list(input(id = 'dropdown1', property='value')),
+
+  # this translates your list of params into function arguments
+  function(location) {
+    paste("Chart 3: Pollutant Concentration in ",  location)
+  }
+)
 
 app$callback(
   # update figure of gap-graph
@@ -79,6 +91,19 @@ app$callback(
   # this translates your list of params into function arguments
   function(year_value, locations, pm_s) {
     ggplotly( barplot(pm_df, pm = pm_s, init_locations = locations, daterange = year_value))
+  }
+)
+
+app$callback(
+  output=list(id = 'chart-2-title', property='children'),
+  
+  params=list(input(id = 'radio1', property='value')),
+
+  function(pm_s) {
+	if (pm_s == 'PM25') {
+  		pm_s = 'PM2.5'
+	}
+	paste("Chart 2: Distribution of ", pm_s, " Concentrations for BC cities")
   }
 )
 
@@ -97,6 +122,20 @@ app$callback(
   }
 )
 
+
+app$callback(
+  output=list(id = 'chart-3-title', property='children'),
+  
+  params=list(input(id = 'radio1', property='value')),
+
+  function(pm_s) {
+	if (pm_s == 'PM25') {
+  		pm_s = 'PM2.5'
+	}
+	paste("Chart 1: ", pm_s, " Concentration for given locations")
+  }
+)
+
 app$callback(
   # update figure of gap-graph
   output=list(id = 'chart-4', property='figure'),
@@ -110,6 +149,18 @@ app$callback(
   }
 )
 
+app$callback(
+  output=list(id = 'chart-4-title', property='children'),
+  
+  params=list(input(id = 'radio2', property='value')),
+
+  function(pm_s) {
+	if (pm_s == 'PM25') {
+  		pm_s = 'PM2.5'
+	}
+	paste("Chart 4: ", pm_s, " Concentration Heatmap")
+  }
+)
 
 app$callback(
   # update figure of gap-graph
