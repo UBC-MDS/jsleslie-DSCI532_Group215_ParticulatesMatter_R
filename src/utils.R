@@ -22,6 +22,19 @@ library(plotly)
 
 ###### Plot 1: Location Linechart
 
+#' Construct a linechart that compares a specified pollutant concentration across selected times and locations
+#'
+#' @param data Main Dataframe containing pollutant concentrations for each location
+#' @param avg_data Dataframe containing pollutant averages
+#' @param pm pollutant type
+#' @param init_locations list of BC locations
+#' @param width plot width
+#' @param height plot height
+#' @param daterange list containing a year range
+#' 
+#' @return ggplot linechart based on filters
+#' @examples
+#' location_linechart(data, avg_data, pm = "PM25", init_locations= list(), width = NULL, height = NULL, daterange=list(2000,2017))
 location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list(), width = NULL, height = NULL, daterange=list(2000,2017)){
   
   temp_data <- data %>% filter(PARAMETER == pm, STATION_NAME %in% init_locations)
@@ -49,6 +62,18 @@ location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list
 
 ###### Plot 2: One Location Linechart
 
+#' Construct a linechart that compares pollutant concentrations across selected time, for a given location
+#'
+#' @param data Main Dataframe containing pollutant concentrations for each location
+#' @param avg_data Dataframe containing pollutant averages
+#' @param init_locations list of BC locations
+#' @param width plot width
+#' @param height plot height
+#' @param daterange list containing a year range
+#' 
+#' @return ggplot linechart based on filters
+#' @examples
+#' linechart(data, avg_data, init_locations= list(), width = NULL, height = NULL, daterange=list(2000,2017))
 linechart <- function(data, avg_data, init_locations= list(), width = NULL, height = NULL, daterange= list(2000,2017)){
   
   temp_data <- data %>% filter(STATION_NAME %in% init_locations)
@@ -75,6 +100,19 @@ linechart <- function(data, avg_data, init_locations= list(), width = NULL, heig
 
 
 ###### Plot 3: Distribution Histogram
+
+#' Construct a barchart that compares a specified pollutant concentration across selected times and locations
+#'
+#' @param data Main Dataframe containing pollutant concentrations for each location
+#' @param pm pollutant type
+#' @param init_locations list of BC locations
+#' @param width plot width
+#' @param height plot height
+#' @param daterange list containing a year range
+#' 
+#' @return ggplot linechart based on filters
+#' @examples
+#' barplot(data, pm = "PM25", init_locations= list(), width = NULL, height = NULL, daterange=list(2000,2017))
 barplot <- function(data, pm = "PM25", init_locations = list(), width = NULL, height = NULL, daterange= list(2000,2017)){
     
     temp_data <- data %>% filter(PARAMETER == pm, STATION_NAME %in% init_locations)
@@ -92,6 +130,18 @@ barplot <- function(data, pm = "PM25", init_locations = list(), width = NULL, he
 
 ###### Plot 4: Heatmap
 
+#' Construct a heatmap that shows specified pollutant concentrations across years and locations
+#'
+#' @param data Main Dataframe containing pollutant concentrations for each location
+#' @param avg_data Dataframe containing pollutant averages
+#' @param pm pollutant type
+#' @param width plot width
+#' @param height plot height
+#' @param daterange list containing a year range
+#' 
+#' @return ggplot linechart based on filters
+#' @examples
+#' heatmap(data, pm = "PM25", width = NULL, height = NULL, daterange=list(2000,2017))
 heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, daterange= list(2000,2017)){
     
     temp_data <- data %>% filter(PARAMETER == pm)
