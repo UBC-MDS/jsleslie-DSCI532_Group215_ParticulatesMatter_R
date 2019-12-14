@@ -6,6 +6,17 @@ library(dashTable)
 library(plotly)
 source("https://raw.githubusercontent.com/UBC-MDS/DSCI532_Group215_ParticulatesMatter_R/master/src/utils.R")
 
+#' Returns the content of the first tab based on the two dataframes provided
+#'
+#' Creates the content of the first tab by drawing interactive 4 plots arrangeed 2x2.
+#' Creates ids for each of the titles and plots for callbacks
+#'
+#' @param pm_df Main Dataframe
+#' @param avg_df Dataframe containing pollutant averages
+#' 
+#' @return dash htmlDiv with all content inside
+#' @examples
+#' get_dirst_tab(read_csv('main.csv'), read_csv('avg.csv'))
 get_first_tab <- function(pm_df, avg_df) {
 
 	chart_1 <- dccGraph(
@@ -179,6 +190,16 @@ get_first_tab <- function(pm_df, avg_df) {
   ))
 }
 
+#' Returns the content of the second tab based on the main dataframe provided
+#'
+#' Creates the content of the second tab by drawing a big heatmap with x-axis labels
+#' Adds id for the plot to be used in the callback
+#'
+#' @param pm_df Main Dataframe
+#' 
+#' @return list containing dropdown and the plot
+#' @examples
+#' get_dirst_tab(read_csv('main.csv'), read_csv('avg.csv'))
 get_second_tab <- function(pm_df){
 	list(
 
