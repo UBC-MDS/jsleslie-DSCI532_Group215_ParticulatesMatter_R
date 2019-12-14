@@ -8,19 +8,19 @@ library(plotly)
 library(zoo)
 library(ggplot2)
 library(viridis)
-source("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/src/utils.R")
-source("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/src/tabs.R")
+source("./src/utils.R")
+source("./src/tabs.R")
 
 app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.css")
 
 
-pm_df = read_csv("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/data/processed_data.csv",
+pm_df = read_csv("./data/processed_data.csv",
                col_types = cols_only(index = col_date(),
                                      STATION_NAME = col_factor(),
                                      PARAMETER = col_factor(),
                                      RAW_VALUE = col_double()))
 
-avg_df = read_csv("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/data/processed_baseline_data.csv",
+avg_df = read_csv("./data/processed_baseline_data.csv",
                   col_types = cols_only(index = col_date(),
                                      PARAMETER = col_factor(),
                                      RAW_VALUE = col_double()))
@@ -66,6 +66,18 @@ app$callback(
   }
 )
 
+app$callback(
+  # update figure of gap-graph
+  output=list(id = 'chart-3-title', property='children'),
+  
+  # based on values of year, continent, y-axis components
+  params=list(input(id = 'dropdown1', property='value')),
+
+  # this translates your list of params into function arguments
+  function(location) {
+    paste("Chart 3: Pollutant Concentration in ",  location)
+  }
+)
 
 app$callback(
   # update figure of gap-graph
@@ -84,6 +96,19 @@ app$callback(
 )
 
 app$callback(
+  output=list(id = 'chart-2-title', property='children'),
+  
+  params=list(input(id = 'radio1', property='value')),
+
+  function(pm_s) {
+	if (pm_s == 'PM25') {
+  		pm_s = 'PM2.5'
+	}
+	paste("Chart 2: Distribution of ", pm_s, " Concentrations for BC cities")
+  }
+)
+
+app$callback(
   # update figure of gap-graph
   output=list(id = 'chart-3', property='figure'),
   
@@ -95,6 +120,20 @@ app$callback(
   # this translates your list of params into function arguments
   function(year_value, locations, pm_s) {
     ggplotly(location_linechart(pm_df, avg_df, pm=pm_s, init_locations = locations, daterange = year_value))
+  }
+)
+
+
+app$callback(
+  output=list(id = 'chart-1-title', property='children'),
+  
+  params=list(input(id = 'radio1', property='value')),
+
+  function(pm_s) {
+	if (pm_s == 'PM25') {
+  		pm_s = 'PM2.5'
+	}
+	paste("Chart 1: ", pm_s, " Concentration for given locations")
   }
 )
 
@@ -112,6 +151,19 @@ app$callback(
 )
 
 app$callback(
+  output=list(id = 'chart-4-title', property='children'),
+  
+  params=list(input(id = 'radio2', property='value')),
+
+  function(pm_s) {
+	if (pm_s == 'PM25') {
+  		pm_s = 'PM2.5'
+	}
+	paste("Chart 4: ", pm_s, " Concentration Heatmap")
+  }
+)
+
+app$callback(
   # update figure of gap-graph
   output=list(id = 'chart-heatmap', property='figure'),
   
@@ -120,7 +172,7 @@ app$callback(
 
   # this translates your list of params into function arguments
   function(pm_s) {
-	ggplotly(heatmap(pm_df, pm=pm_s))
+	ggplotly(heatmap(pm_df, pm=pm_s, include_years=TRUE))
   }
 )
 app$run_server(host = "0.0.0.0", port = Sys.getenv('PORT', 8050))

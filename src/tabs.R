@@ -4,7 +4,7 @@ library(dashHtmlComponents)
 library(dashTable)
 #library(tidyverse)
 library(plotly)
-source("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/src/utils.R")
+source("./src/utils.R")
 
 get_first_tab <- function(pm_df, avg_df) {
 
@@ -71,19 +71,21 @@ get_first_tab <- function(pm_df, avg_df) {
                     ))      
         )
       ),
-        ## CHART 1 
-      htmlDiv(className = "five columns", children =list(
-        htmlDiv(className = "row", children=list(
-          htmlH6("Chart 3: Pollutant Concentration in <Location>",
-            style=list(backgroundColor ="#A8D5BAFF", border='1px solid', text_align='center', padding_left= "5")),
-          chart_3))
-      )
-    ),
+      ## CHART 3 
+        htmlDiv(className = "five columns", style=list(backgroundColor= "#ffffff", margin_left='10', margin_right= '10', padding= "0"), children =list(
+          htmlDiv(className = "row", children=list(
+            htmlH6("Chart 1: <Polutant> Concentration for given locations", 
+	      id = 'chart-1-title',
+              style=list(backgroundColor ="#8BBEE8FF", border='1px solid', text_align='center', padding_left= "5")),
+            chart_3))
+        )
+      ),
 
         ## CHART 2
         htmlDiv(className = "five columns", style=list(backgroundColor= "#ffffff", margin_left='10', margin_right= '10', padding= "0"), children =list(
             htmlDiv(className = "row", children=list(
               htmlH6("Chart 2: Distribution of <Pollutant> Concentrations for BC cities",
+		id = 'chart-2-title',
                 style=list(backgroundColor ="#8BBEE8FF", border='1px solid', text_align='center', padding_left= "5")),
               chart_2))
           )
@@ -134,19 +136,21 @@ get_first_tab <- function(pm_df, avg_df) {
                   ))      
         )
       ),
-      ## CHART 3 
-        htmlDiv(className = "five columns", style=list(backgroundColor= "#ffffff", margin_left='10', margin_right= '10', padding= "0"), children =list(
-          htmlDiv(className = "row", children=list(
-            htmlH6("Chart 1: <Polutant> Concentration for given locations", 
-              style=list(backgroundColor ="#8BBEE8FF", border='1px solid', text_align='center', padding_left= "5")),
-            chart_1))
-        )
-      ),
+        ## CHART 3 
+      htmlDiv(className = "five columns", children =list(
+        htmlDiv(className = "row", children=list(
+          htmlH6("Chart 3: Pollutant Concentration in <Location>",
+	    id = 'chart-3-title',
+            style=list(backgroundColor ="#A8D5BAFF", border='1px solid', text_align='center', padding_left= "5")),
+          chart_1))
+      )
+    ),
 
       ## CHART 4
       htmlDiv(className = "five columns", children =list(
           htmlDiv(className = "row", children=list(
             htmlH6("Chart 4: <Pollutant> Concentration Heatmap",
+	      id = 'chart-4-title',
               style=list(backgroundColor ="#E3D1FB", border='1px solid', text_align='center', padding_left= "5")),
             chart_4))
         )
@@ -250,5 +254,5 @@ get_second_tab <- function(pm_df){
       ),
 	dccGraph(
 	  id = "chart-heatmap",
-	  figure = ggplotly(heatmap(pm_df))))
+	  figure = ggplotly(heatmap(pm_df, include_years=TRUE))))
 }

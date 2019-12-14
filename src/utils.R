@@ -35,11 +35,10 @@ library(purrr)
 #' @examples
 #' location_linechart(data, avg_data, pm = "PM25", init_locations= list(), width = NULL, height = NULL, daterange=list(2000,2017))
 location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list(), width = NULL, height = NULL, daterange=list(2000,2017)){
-  
   temp_data <- data %>% filter(PARAMETER == pm, STATION_NAME %in% init_locations)
   
   #Preserve location and conduct rolling avg operation on the nested data frame (updates RAW_VALUE column)
-  nested_df <- nest(temp_data,data = c(index, PARAMETER, RAW_VALUE))
+  nested_df <- nest(temp_data,c(index, PARAMETER, RAW_VALUE))
   nested_df$data <- lapply(nested_df$data, function(df) df %>% mutate(RAW_VALUE = rollmean(RAW_VALUE, 5, na.pad = TRUE)))
   temp_data <- unnest(nested_df, cols = data)
   
@@ -78,7 +77,7 @@ linechart <- function(data, avg_data, init_locations= list(), width = NULL, heig
   temp_data <- data %>% filter(STATION_NAME %in% init_locations)
   
   #Preserve location and conduct rolling avg operation on the nested data frame (updates RAW_VALUE column)
-  nested_df <- nest(temp_data,data = c(index, STATION_NAME, RAW_VALUE))
+  nested_df <- nest(temp_data, c(index, STATION_NAME, RAW_VALUE))
   nested_df$data <- lapply(nested_df$data, function(df) df %>% mutate(RAW_VALUE = rollmean(RAW_VALUE, 5, na.pad = TRUE)))
   temp_data <- unnest(nested_df, cols = data)
   
@@ -141,19 +140,32 @@ barplot <- function(data, pm = "PM25", init_locations = list(), width = NULL, he
 #' @return ggplot linechart based on filters
 #' @examples
 #' heatmap(data, pm = "PM25", width = NULL, height = NULL, daterange=list(2000,2017))
-heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, daterange= list(2000,2017)){
+heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, daterange= list(2000,2017), include_years=FALSE){
     
     temp_data <- data %>% filter(PARAMETER == pm)
     
     x_axis_vals <- str_extract(temp_data$index, ".*-01-01")
     x_axis_vals <- unique(x_axis_vals[!is.na(x_axis_vals)])
     new_x_vals <- lapply(x_axis_vals, function(x) paste("Jan\n ", str_replace(x, "(-01-01)", "")))
-    
-    ggplot(temp_data, aes(x = factor(index), y = STATION_NAME, fill = RAW_VALUE)) +
+
+    if(include_years){
+	print('here')
+    	ggplot(temp_data, aes(x = factor(index), y = STATION_NAME, fill = RAW_VALUE)) +
           geom_tile() +
           scale_x_discrete(breaks = c(x_axis_vals), labels = c(new_x_vals)) +
           scale_fill_viridis(option = "magma", direction = -1) +
           labs( x = "Date",y = "Location", fill = "Pollution\nConcentration\n(µg/m3)") +
-          theme(legend.title = element_text( size = 7), legend.position = "top") 
-      
+          theme(legend.title = element_text( size = 7), 
+		legend.position = "top")
+    } else {
+    	ggplot(temp_data, aes(x = factor(index), y = STATION_NAME, fill = RAW_VALUE)) +
+          geom_tile() +
+          scale_x_discrete(breaks = c(x_axis_vals), labels = c(new_x_vals)) +
+          scale_fill_viridis(option = "magma", direction = -1) +
+          labs( x = "Date",y = "Location", fill = "Pollution\nConcentration\n(µg/m3)") +
+          theme(legend.title = element_text( size = 7), 
+		legend.position = "top",
+		axis.text.x=element_blank(),
+        	axis.ticks.x=element_blank()) 
+    }
 }
