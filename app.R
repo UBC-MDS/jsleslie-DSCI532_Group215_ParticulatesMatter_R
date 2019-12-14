@@ -62,7 +62,7 @@ app$callback(
 
   # this translates your list of params into function arguments
   function(year_value, location) {
-    ggplotly(linechart(pm_df, avg_df, init_locations = location, daterange = year_value))
+    ggplotly(linechart(pm_df, avg_df, init_locations = location, daterange = year_value)) 
   }
 )
 
@@ -90,7 +90,8 @@ app$callback(
 
   # this translates your list of params into function arguments
   function(year_value, locations, pm_s) {
-    ggplotly( barplot(pm_df, pm = pm_s, init_locations = locations, daterange = year_value))
+    g <- ggplotly( barplot(pm_df, pm = pm_s, init_locations = locations, daterange = year_value)) %>%
+    layout(dragmode = FALSE) 
   }
 )
 
