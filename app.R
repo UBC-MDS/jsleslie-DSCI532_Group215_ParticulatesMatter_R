@@ -8,19 +8,21 @@ library(plotly)
 library(zoo)
 library(ggplot2)
 library(viridis)
-source("./src/utils.R")
-source("./src/tabs.R")
+
+
+source("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/src/utils.R")
+source("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/src/tabs.R")
 
 app <- Dash$new(external_stylesheets = "https://codepen.io/chriddyp/pen/bWLwgP.css")
 
 
-pm_df = read_csv("./data/processed_data.csv",
+pm_df = read_csv("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/data/processed_data.csv",
                col_types = cols_only(index = col_date(),
                                      STATION_NAME = col_factor(),
                                      PARAMETER = col_factor(),
                                      RAW_VALUE = col_double()))
 
-avg_df = read_csv("./data/processed_baseline_data.csv",
+avg_df = read_csv("https://raw.githubusercontent.com/jsleslie/DSCI532_Group215_ParticulatesMatter_R/master/data/processed_baseline_data.csv",
                   col_types = cols_only(index = col_date(),
                                      PARAMETER = col_factor(),
                                      RAW_VALUE = col_double()))
@@ -28,7 +30,7 @@ avg_df = read_csv("./data/processed_baseline_data.csv",
 
 
 app$layout(htmlDiv(list(
-	      htmlDiv(className="row", style=list(backgroundColor="#000000", border='1px solid', padding_left="5"), children= list(
+	      htmlDiv(className="row", style=list(backgroundColor="#000000", border='1px solid', padding="10px"), children= list(
 		htmlH3('Pollutants Matter BC – Visualization of Particulate Matter Concentrations',
 			style= list(color = "#ffffff", margin_top = 2, margin_bottom = 2)),
 		htmlP('This application tracks weighted monthly averages for pollution data collected from different stations across British Columbia. The measured pollutants, PM2.5 and PM10, refer to atmospheric particulate matter (PM) that have a diameter of less than 2.5 and 10 micrometers, respectively.',
