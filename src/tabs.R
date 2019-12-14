@@ -6,6 +6,17 @@ library(dashTable)
 library(plotly)
 source("https://raw.githubusercontent.com/UBC-MDS/DSCI532_Group215_ParticulatesMatter_R/master/src/utils.R")
 
+#' Returns the content of the first tab based on the two dataframes provided
+#'
+#' Creates the content of the first tab by drawing interactive 4 plots arrangeed 2x2.
+#' Creates ids for each of the titles and plots for callbacks
+#'
+#' @param pm_df Main Dataframe
+#' @param avg_df Dataframe containing pollutant averages
+#' 
+#' @return dash htmlDiv with all content inside
+#' @examples
+#' get_dirst_tab(read_csv('main.csv'), read_csv('avg.csv'))
 get_first_tab <- function(pm_df, avg_df) {
 
 	chart_1 <- dccGraph(
@@ -53,13 +64,10 @@ get_first_tab <- function(pm_df, avg_df) {
                        ),
        		    
 
-                      ### INSERT RADIO BUTTONS HERE
 
                       htmlP("Location:"),
 
 	              dccDropdown(
-	                # purrr:map can be used as a shortcut instead of writing the whole list
-	                # especially useful if you wanted to filter by country!
 	                id = 'dropdown2',
 	                options = map(
 	          	levels(pm_df$STATION_NAME), function(x){
@@ -68,11 +76,10 @@ get_first_tab <- function(pm_df, avg_df) {
 	                value = 'Vancouver', #Selects all by default
 	                multi = TRUE
 	              )
-                      ### INSERT DROPDOWN LIST HERE
                     ))      
         )
       ),
-      ## CHART 3 
+      ## CHART 1 
         htmlDiv(className = "five columns", style=list(backgroundColor= "#ffffff", margin_left='10', margin_right= '10', padding= "0"), children =list(
           htmlDiv(className = "row", children=list(
             htmlH6("Chart 1: <Polutant> Concentration for given locations", 
@@ -106,8 +113,6 @@ get_first_tab <- function(pm_df, avg_df) {
                       htmlP("Location:"),
 
 	              dccDropdown(
-	                # purrr:map can be used as a shortcut instead of writing the whole list
-	                # especially useful if you wanted to filter by country!
 	                id = 'dropdown1',
 	                options = map(
 	                  levels(pm_df$STATION_NAME), function(x){
@@ -133,7 +138,6 @@ get_first_tab <- function(pm_df, avg_df) {
                        ),
                        value = "PM10"
                        )
-                    ### INSERT RADIO BUTTONS LIST HERE
                   ))      
         )
       ),
@@ -173,7 +177,6 @@ get_first_tab <- function(pm_df, avg_df) {
 	        max = 2017,
 	        step=1,
 	        value = list(2000, 2017))
-              ### DATE SLIDER COMPONENT GOES HERE
 
 
               ),
@@ -185,72 +188,28 @@ get_first_tab <- function(pm_df, avg_df) {
     )
     
   ))
-
-	# return(
-	#   htmlDiv(
-	#     list(
-	#       # dccGraph(
-	#       #     id = "chart-1",
-	#       #     figure = ggplotly(linechart(pm_df, avg_df, init_locations = list("Vancouver")))
-	#       # ),
-	#       chart_1,
-	#       chart_2,
-	#       chart_3,
-	#       chart_4,
-	#     
-
-	#     dccRangeSlider(
-	#       id = 'datarange',
-	#       marks = slidebar_marks,
-	#       min = 2000,
-	#       max = 2017,
-	#       step=1,
-	#       value = list(2000, 2017)),
-
-	#     dccDropdown(
-	#       # purrr:map can be used as a shortcut instead of writing the whole list
-	#       # especially useful if you wanted to filter by country!
-	#       id = 'dropdown1',
-	#       options = map(
-	# 	levels(pm_df$STATION_NAME), function(x){
-	# 	list(label=x, value=x)
-	#       }),
-	#       value = 'Vancouver', #Selects all by default
-	#       multi = FALSE
-	#     ),
-
-	#     dccDropdown(
-	#       # purrr:map can be used as a shortcut instead of writing the whole list
-	#       # especially useful if you wanted to filter by country!
-	#       id = 'dropdown2',
-	#       options = map(
-	# 	levels(pm_df$STATION_NAME), function(x){
-	# 	list(label=x, value=x)
-	#       }),
-	#       value = 'Vancouver', #Selects all by default
-	#       multi = TRUE
-	#     )
-
-	#     ),
-
-
-	#     className = "row"
-	#   )
-	# )
 }
 
+#' Returns the content of the second tab based on the main dataframe provided
+#'
+#' Creates the content of the second tab by drawing a big heatmap with x-axis labels
+#' Adds id for the plot to be used in the callback
+#'
+#' @param pm_df Main Dataframe
+#' 
+#' @return list containing dropdown and the plot
+#' @examples
+#' get_dirst_tab(read_csv('main.csv'), read_csv('avg.csv'))
 get_second_tab <- function(pm_df){
 	list(
 
       dccDropdown(
-	# purrr:map can be used as a shortcut instead of writing the whole list
-	# especially useful if you wanted to filter by country!
 	id = 'heatmap_pm',
         options=list(
           list("label" = "PM10", "value" = "PM10"),
           list("label" = "PM2.5", "value" = "PM25")
         ),
-	value = 'PM10', #Selects all by default
+	value = 'PM10',
 	multi = FALSE
       ),
 	dccGraph(
