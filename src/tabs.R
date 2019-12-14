@@ -39,9 +39,10 @@ get_first_tab <- function(pm_df, avg_df) {
         htmlDiv(className = "two columns", children =list(
 
           htmlDiv(className = "row", 
-            style=list(backgroundColor ="#8BBEE8FF",padding_left="10", padding_right="10", padding_top="2", padding_bottom="195",border= '1px solid'), 
+            style=list(backgroundColor ="#8BBEE8FF",paddingLeft="10px", paddingRight="10px", paddingTop="5px", paddingBottom="350px",border= '1px solid'), 
             children = list(
                       htmlP("Chart 1 & 2 controls:\n\n\n"),
+					  htmlP("Pollutant:"),
                       dccRadioItems(
 		       id = 'radio1',
                        options=list(
@@ -50,7 +51,7 @@ get_first_tab <- function(pm_df, avg_df) {
                        ),
                        value = "PM10"
                        ),
-       		    htmlP("Pollutant:"),
+       		    
 
                       ### INSERT RADIO BUTTONS HERE
 
@@ -76,7 +77,7 @@ get_first_tab <- function(pm_df, avg_df) {
           htmlDiv(className = "row", children=list(
             htmlH6("Chart 1: <Polutant> Concentration for given locations", 
 	      id = 'chart-1-title',
-              style=list(backgroundColor ="#8BBEE8FF", border='1px solid', text_align='center', padding_left= "5")),
+              style=list(backgroundColor ="#8BBEE8FF", border='1px solid', textAlign='center', padding_left= "5")),
             chart_3))
         )
       ),
@@ -86,7 +87,7 @@ get_first_tab <- function(pm_df, avg_df) {
             htmlDiv(className = "row", children=list(
               htmlH6("Chart 2: Distribution of <Pollutant> Concentrations for BC cities",
 		id = 'chart-2-title',
-                style=list(backgroundColor ="#8BBEE8FF", border='1px solid', text_align='center', padding_left= "5")),
+                style=list(backgroundColor ="#8BBEE8FF", border='1px solid', textAlign='center', padding_left= "5")),
               chart_2))
           )
       ))
@@ -99,7 +100,7 @@ get_first_tab <- function(pm_df, avg_df) {
           
           ### BOX 2
           htmlDiv(className = "row", 
-            style=list(backgroundColor ="#A8D5BAFF",padding_left="10", padding_right="10", padding_top="2", padding_bottom="195",border= '1px solid'), 
+            style=list(backgroundColor ="#A8D5BAFF",paddingLeft="10px", paddingRight="10px", paddingTop="5px", paddingBottom="150px",border= '1px solid'), 
             children = list(
                       htmlP("Chart 3 controls:\n\n\n"),
                       htmlP("Location:"),
@@ -119,7 +120,7 @@ get_first_tab <- function(pm_df, avg_df) {
 
           ### BOX 3
           htmlDiv(className = "row", 
-          style=list(backgroundColor ="#E3D1FB",padding_left="10", padding_right="10", padding_top="2", padding_bottom="195",border= '1px solid'), 
+          style=list(backgroundColor ="#E3D1FB",paddingLeft="10px", paddingRight="10px", paddingTop="5px", paddingBottom="150px",border= '1px solid'), 
           children = list(
                     htmlP("Chart 4 controls:\n\n\n"),
                     htmlP("Pollutant:"),
@@ -141,7 +142,7 @@ get_first_tab <- function(pm_df, avg_df) {
         htmlDiv(className = "row", children=list(
           htmlH6("Chart 3: Pollutant Concentration in <Location>",
 	    id = 'chart-3-title',
-            style=list(backgroundColor ="#A8D5BAFF", border='1px solid', text_align='center', padding_left= "5")),
+            style=list(backgroundColor ="#A8D5BAFF", border='1px solid', textAlign='center', padding_left= "5")),
           chart_1))
       )
     ),
@@ -151,7 +152,7 @@ get_first_tab <- function(pm_df, avg_df) {
           htmlDiv(className = "row", children=list(
             htmlH6("Chart 4: <Pollutant> Concentration Heatmap",
 	      id = 'chart-4-title',
-              style=list(backgroundColor ="#E3D1FB", border='1px solid', text_align='center', padding_left= "5")),
+              style=list(backgroundColor ="#E3D1FB", border='1px solid', textAlign='center', padding_left= "5")),
             chart_4))
         )
     ))
@@ -159,11 +160,11 @@ get_first_tab <- function(pm_df, avg_df) {
 
 
 
-      htmlDiv(className = "row", children = list(
+      htmlDiv(className = "row", style=list(backgroundColor="#d2d7df", paddingTop ="5px", paddingBottom ="30px", paddingLeft="20px", paddingRight="30px",  border ='1px solid'), children = list(
           #htmlP("Date control slider"),
            #BOX5 DATE CONTROLLER
-          htmlDiv(className="row",  style=list(backgroundColor="#d2d7df", padding_bottom ="30", padding_left="10",  border ='1px solid'), children=list(
-              htmlP("Date control slider", style=list(padding_top="0")),
+          htmlDiv(className="row",  children=list(
+              htmlP("Date control slider"),
               
 	      dccRangeSlider(
 	        id = 'datarange',
