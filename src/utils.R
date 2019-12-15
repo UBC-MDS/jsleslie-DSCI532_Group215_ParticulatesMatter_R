@@ -5,20 +5,6 @@ library(tidyr)
 library(stringr)
 library(purrr)
 
-
-# Read in files for testing phase (remove from final product)
-# pollution_df <- read_csv("data/processed_data.csv",
-#                col_types = cols_only(index = col_date(),
-#                                      STATION_NAME = col_factor(),
-#                                      PARAMETER = col_factor(),
-#                                      RAW_VALUE = col_double()))
-# 
-# df_avg <- read_csv("data/processed_baseline_data.csv",
-#                   col_types = cols_only(index = col_date(),
-#                                      PARAMETER = col_factor(),
-#                                      RAW_VALUE = col_double()))
-
-
 ###### Plot 1: Location Linechart
 
 #' Construct a linechart that compares a specified pollutant concentration across selected times and locations
@@ -53,7 +39,7 @@ location_linechart <- function(data, avg_data, pm = "PM25", init_locations= list
   geom_point() +
   scale_color_brewer(palette = "Dark2") +
   labs(x = "Year",
-       y = "Pollutant Concentration (µg/m3)", 
+       y = "Pollutant Concentration (mu*g/m3)", 
        color = "Locations")
   
 }
@@ -92,7 +78,7 @@ linechart <- function(data, avg_data, init_locations= list(), width = NULL, heig
   geom_line() +
   geom_point() +
   scale_color_brewer(palette = "Dark2") +
-  labs(x = "Year", y = "Pollutant Concentration (µg/m3)")
+  labs(x = "Year", y = "Pollutant Concentration (mu*g/m3)")
   
 }
 
@@ -120,7 +106,7 @@ barplot <- function(data, pm = "PM25", init_locations = list(), width = NULL, he
     geom_histogram(position = "identity", alpha = 0.3, binwidth = 0.5)  +
     scale_color_brewer(palette = "Dark2") +
     scale_fill_brewer(palette = "Dark2") +
-    labs(x = "Pollutant Concentration (µg/m3)", y = "Frequency", fill = "Locations") +
+    labs(x = "Pollutant Concentration (mu*g/m3)", y = "Frequency", fill = "Locations") +
     guides(color=FALSE)
     
     
@@ -154,7 +140,7 @@ heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, da
           geom_tile() +
           scale_x_discrete(breaks = c(x_axis_vals), labels = c(new_x_vals)) +
           scale_fill_viridis(option = "magma", direction = -1) +
-          labs( x = "Date",y = "Location", fill = "Pollution\nConcentration\n(µg/m3)") +
+          labs( x = "Date",y = "Location", fill = "Pollution\nConcentration\n(mu*g/m3)") +
           theme(legend.title = element_text( size = 7), 
 		legend.position = "top")
     } else {
@@ -162,7 +148,7 @@ heatmap <- function(data, avg_data, pm = "PM25", width = NULL, height = NULL, da
           geom_tile() +
           scale_x_discrete(breaks = c(x_axis_vals), labels = c(new_x_vals)) +
           scale_fill_viridis(option = "magma", direction = -1) +
-          labs( x = "Date",y = "Location", fill = "Pollution\nConcentration\n(µg/m3)") +
+          labs( x = "Date",y = "Location", fill = "Pollution\nConcentration\n(mu*g/m3)") +
           theme(legend.title = element_text( size = 7), 
 		legend.position = "top",
 		axis.text.x=element_blank(),

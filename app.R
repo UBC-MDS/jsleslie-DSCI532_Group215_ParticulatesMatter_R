@@ -31,7 +31,7 @@ avg_df = read_csv("https://raw.githubusercontent.com/UBC-MDS/DSCI532_Group215_Pa
 
 app$layout(htmlDiv(list(
 	      htmlDiv(className="row", style=list(backgroundColor="#000000", border='1px solid', padding="10px"), children= list(
-		htmlH3('Pollutants Matter BC – Visualization of Particulate Matter Concentrations',
+		htmlH3('Pollutants Matter BC : Visualization of Particulate Matter Concentrations',
 			style= list(color = "#ffffff", margin_top = 2, margin_bottom = 2)),
 		htmlP('This application tracks weighted monthly averages for pollution data collected from different stations across British Columbia. The measured pollutants, PM2.5 and PM10, refer to atmospheric particulate matter (PM) that have a diameter of less than 2.5 and 10 micrometers, respectively.',
 			style= list(color = "#ffffff", margin_top = 2, margin_bottom = 2))
