@@ -5,20 +5,6 @@ library(tidyr)
 library(stringr)
 library(purrr)
 
-
-# Read in files for testing phase (remove from final product)
-# pollution_df <- read_csv("data/processed_data.csv",
-#                col_types = cols_only(index = col_date(),
-#                                      STATION_NAME = col_factor(),
-#                                      PARAMETER = col_factor(),
-#                                      RAW_VALUE = col_double()))
-# 
-# df_avg <- read_csv("data/processed_baseline_data.csv",
-#                   col_types = cols_only(index = col_date(),
-#                                      PARAMETER = col_factor(),
-#                                      RAW_VALUE = col_double()))
-
-
 ###### Plot 1: Location Linechart
 
 #' Construct a linechart that compares a specified pollutant concentration across selected times and locations
